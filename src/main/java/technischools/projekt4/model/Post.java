@@ -1,15 +1,16 @@
 package technischools.projekt4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
+import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
 public class Post {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String content;
@@ -18,14 +19,19 @@ public class Post {
     private LocalDateTime createdAt;
     private Boolean pinned;
 
-    public Post(Long id, String title, String content, String category, String author, LocalDateTime createdAt, Boolean pinned) {
+    // cascade will delete comments when a post is deleted
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public Post(Long id, List<Comment> comments, Boolean pinned, LocalDateTime createdAt, String author, String category, String content, String title) {
         this.id = id;
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.author = author;
-        this.createdAt = createdAt;
         this.pinned = pinned;
+        this.createdAt = createdAt;
+        this.author = author;
+        this.category = category;
+        this.content = content;
+        this.title = title;
+        this.comments = comments;
     }
 
     public Post() {}
@@ -86,6 +92,14 @@ public class Post {
         this.pinned = pinned;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -96,6 +110,7 @@ public class Post {
                 ", author='" + author + '\'' +
                 ", createdAt=" + createdAt +
                 ", pinned=" + pinned +
+                ", comments=" + comments +
                 '}';
     }
 }
