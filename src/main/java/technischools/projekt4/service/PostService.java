@@ -1,6 +1,8 @@
 package technischools.projekt4.service;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import technischools.projekt4.event.PostPublishedEvent;
 import technischools.projekt4.exception.PostNotFound;
 import technischools.projekt4.model.Post;
 import technischools.projekt4.repository.PostRepository;
@@ -11,8 +13,11 @@ import java.util.stream.StreamSupport;
 @Service
 public class PostService implements PostServiceInterface {
     private final PostRepository repository;
-    public PostService(PostRepository repository) {
-       this.repository = repository;
+    private final ApplicationEventPublisher eventPublisher;
+
+    public PostService(PostRepository repository, ApplicationEventPublisher eventPublisher) {
+        this.repository = repository;
+        this.eventPublisher = eventPublisher;
     }
 
     public Post getPostById(Long id) {
@@ -32,7 +37,9 @@ public class PostService implements PostServiceInterface {
     }
 
     public Post createPost(Post post) {
-        return repository.save(post);
+        Post savedPost = repository.save(post);
+        eventPublisher.publishEvent(new PostPublishedEvent(this, savedPost));
+        return savedPost;
     }
 
     public  Post updatePost(Long id, Post post) {
