@@ -3,18 +3,18 @@ package technischools.projekt4.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import technischools.projekt4.model.Post;
-import technischools.projekt4.service.PostService;
+import technischools.projekt4.model.PostCategory;
 import technischools.projekt4.service.PostServiceInterface;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
-public class PostControlller extends BaseController {
+public class PostController extends BaseController {
 
     private final PostServiceInterface postService;
 
-    public PostControlller(PostServiceInterface postService) {
+    public PostController(PostServiceInterface postService) {
         this.postService = postService;
     }
 
@@ -29,7 +29,7 @@ public class PostControlller extends BaseController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Post>> GetSearchPosts(@RequestParam String keyword, @RequestParam String category) {
+    public ResponseEntity<List<Post>> GetSearchPosts(@RequestParam String keyword, @RequestParam PostCategory category) {
         return ResponseEntity.status(200).body(postService.getPostsByTitleOrCategory(keyword, category));
     }
 

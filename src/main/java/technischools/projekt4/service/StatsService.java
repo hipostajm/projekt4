@@ -28,6 +28,6 @@ public class StatsService implements StatsServiceInterface {
     @Override
     public Map<String, Integer> getPostCountPerCategory() {
         List<Post> posts = StreamSupport.stream(repository.findAll().spliterator(), false).toList();
-        return posts.stream().collect(Collectors.groupingBy(Post::getCategory, Collectors.summingInt((p -> 1))));
+        return posts.stream().collect(Collectors.groupingBy(p -> p.getCategory().name(), Collectors.summingInt(p -> 1)));
     }
 }

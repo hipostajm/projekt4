@@ -14,7 +14,8 @@ public class Post {
     private Long id;
     private String title;
     private String content;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private PostCategory category;
     private String author;
     private LocalDateTime createdAt;
     private Boolean pinned;
@@ -23,7 +24,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Post(Long id, List<Comment> comments, Boolean pinned, LocalDateTime createdAt, String author, String category, String content, String title) {
+    public Post(Long id, List<Comment> comments, Boolean pinned, LocalDateTime createdAt, String author, PostCategory category, String content, String title) {
         this.id = id;
         this.pinned = pinned;
         this.createdAt = createdAt;
@@ -60,11 +61,11 @@ public class Post {
         this.content = content;
     }
 
-    public String getCategory() {
+    public PostCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(PostCategory category) {
         this.category = category;
     }
 

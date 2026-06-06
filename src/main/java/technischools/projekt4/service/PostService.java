@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import technischools.projekt4.event.PostPublishedEvent;
 import technischools.projekt4.exception.PostNotFound;
 import technischools.projekt4.model.Post;
+import technischools.projekt4.model.PostCategory;
 import technischools.projekt4.repository.PostRepository;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public class PostService implements PostServiceInterface {
         return StreamSupport.stream(repository.findAll().spliterator(), false).toList();
     }
 
-    public List<Post> getPostsByTitleOrCategory(String title, String category) {
-        return repository.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(title, category);
+    public List<Post> getPostsByTitleOrCategory(String title, PostCategory category) {
+        return repository.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(title, category.name());
     }
 
     public List<Post> getPinnedPosts() {
@@ -42,7 +43,7 @@ public class PostService implements PostServiceInterface {
         return savedPost;
     }
 
-    public  Post updatePost(Long id, Post post) {
+    public Post updatePost(Long id, Post post) {
         Post oldPost = this.getPostById(post.getId());
         oldPost.setTitle(post.getTitle());
         oldPost.setAuthor(post.getAuthor());
