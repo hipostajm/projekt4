@@ -3,7 +3,7 @@ package technischools.projekt4.service;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import technischools.projekt4.event.PostPublishedEvent;
-import technischools.projekt4.exception.PostNotFound;
+import technischools.projekt4.exception.ResourceNotFoundException;
 import technischools.projekt4.model.Post;
 import technischools.projekt4.model.PostCategory;
 import technischools.projekt4.repository.PostRepository;
@@ -22,7 +22,7 @@ public class PostService implements PostServiceInterface {
     }
 
     public Post getPostById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new PostNotFound(id));
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
     }
 
     public List<Post> getAllPosts() {

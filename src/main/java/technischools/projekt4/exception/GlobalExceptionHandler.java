@@ -1,21 +1,13 @@
 package technischools.projekt4.exception;
 
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import technischools.projekt4.service.CommentService;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(PostNotFound.class)
-    public ResponseEntity<ErrorResponse> handlePostNotFound(PostNotFound e) {
-        return ResponseEntity.status(404).body(new ErrorResponse(e.getMessage()));
-    }
-
-    @ExceptionHandler(CommentNotFound.class)
-    public ResponseEntity<ErrorResponse> handleCommentNotFound(CommentNotFound e) {
-        return ResponseEntity.status(404).body(new ErrorResponse(e.getMessage()));
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException e) {
+        return ResponseEntity.status(404).body(new ErrorResponse(e.getMessage(), 404));
     }
 }

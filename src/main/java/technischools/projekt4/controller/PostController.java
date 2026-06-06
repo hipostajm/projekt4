@@ -49,7 +49,8 @@ public class PostController extends BaseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Post> DeletePost(@PathVariable Long id) {
-        return ResponseEntity.status(204).body(postService.deletePost(id));
+    public ResponseEntity<Void> DeletePost(@PathVariable Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,18 +1,26 @@
 package technischools.projekt4.exception;
 
-import org.springframework.http.HttpStatus;
-
 import java.time.LocalDateTime;
 
 public class ErrorResponse {
     private final String message;
+    private int status;
     private final LocalDateTime timestamp = LocalDateTime.now();
 
-    public ErrorResponse(String message) {
+    public ErrorResponse(String message, int status) {
         this.message = message;
+        this.status = status;
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 }

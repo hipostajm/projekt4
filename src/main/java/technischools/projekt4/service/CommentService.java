@@ -1,7 +1,7 @@
 package technischools.projekt4.service;
 
 import org.springframework.stereotype.Service;
-import technischools.projekt4.exception.CommentNotFound;
+import technischools.projekt4.exception.ResourceNotFoundException;
 import technischools.projekt4.model.Comment;
 import technischools.projekt4.repository.CommentRepository;
 
@@ -28,6 +28,6 @@ public class CommentService implements CommentServiceInterface {
     }
 
     public Comment getCommentById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new CommentNotFound(id));
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Comment with id " + id + " not found"));
     }
 }

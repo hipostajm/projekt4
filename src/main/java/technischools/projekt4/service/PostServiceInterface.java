@@ -1,11 +1,9 @@
 package technischools.projekt4.service;
 
-import technischools.projekt4.exception.PostNotFound;
 import technischools.projekt4.model.Post;
 import technischools.projekt4.model.PostCategory;
 
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 public interface PostServiceInterface {
     Post getPostById(Long id);
