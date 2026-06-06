@@ -12,9 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/comments")
 public class CommentController extends BaseController {
-    private CommentServiceInterface commentService;
+    private final CommentServiceInterface commentService;
 
-    public CommentController(CommentService commentService) {
+    public CommentController(CommentServiceInterface commentService) {
         this.commentService = commentService;
     }
 
