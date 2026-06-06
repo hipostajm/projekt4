@@ -5,11 +5,17 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import technischools.projekt4.service.CommentService;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(PostNotFound.class)
     public ResponseEntity<ErrorResponse> handlePostNotFound(PostNotFound e) {
+        return ResponseEntity.status(404).body(new ErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(CommentNotFound.class)
+    public ResponseEntity<ErrorResponse> handleCommentNotFound(CommentNotFound e) {
         return ResponseEntity.status(404).body(new ErrorResponse(e.getMessage()));
     }
 }
