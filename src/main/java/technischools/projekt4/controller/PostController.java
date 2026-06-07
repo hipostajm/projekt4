@@ -9,7 +9,7 @@ import technischools.projekt4.service.PostServiceInterface;
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 public class PostController extends BaseController {
 
     private final PostServiceInterface postService;

@@ -1,5 +1,7 @@
 package technischools.projekt4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "post_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Post post;
     private String author;
 

@@ -44,7 +44,7 @@ public class PostService implements PostServiceInterface {
     }
 
     public Post updatePost(Long id, Post post) {
-        Post oldPost = this.getPostById(post.getId());
+        Post oldPost = this.getPostById(id);
         oldPost.setTitle(post.getTitle());
         oldPost.setAuthor(post.getAuthor());
         oldPost.setPinned(post.getPinned());

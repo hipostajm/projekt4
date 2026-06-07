@@ -1,0 +1,88 @@
+### Base URL Configuration
+@host = http://localhost:8080/api
+
+###
+### POSTS ENDPOINTS
+###
+
+### 1. Get all posts
+GET {{host}}/posts
+Accept: application/json
+
+### 2. Get a single post by ID
+GET {{host}}/posts/1
+Accept: application/json
+
+### 3. Get pinned posts
+GET {{host}}/posts/pinned
+Accept: application/json
+
+### 4. Search posts by keyword and category
+# Categories: URGENT, INFO, EVENT, ANIMEGIRLS, HASKELL, BIGDECIMAL
+GET {{host}}/posts/search?keyword=Java&category=INFO
+Accept: application/json
+
+### 5. Create a new post
+POST {{host}}/posts
+Content-Type: application/json
+
+{
+  "title": "Learning Spring Boot",
+  "content": "Spring Boot makes it easy to create stand-alone, production-grade Spring-based Applications.",
+  "category": "INFO",
+  "author": "John Doe",
+  "pinned": false,
+  "createdAt": "2026-06-07T20:00:00"
+}
+
+### 6. Update an existing post
+PUT {{host}}/posts/1
+Content-Type: application/json
+
+{
+  "title": "Learning Spring Boot (Updated)",
+  "content": "Updated content showing how easy it is to use Spring Boot.",
+  "category": "URGENT",
+  "author": "John Doe",
+  "pinned": true,
+  "createdAt": "2026-06-07T20:00:00"
+}
+
+### 7. Delete a post by ID
+DELETE {{host}}/posts/1
+
+###
+### COMMENTS ENDPOINTS
+###
+
+### 8. Get comments for a specific post
+GET {{host}}/comments/post/1
+Accept: application/json
+
+### 9. Create a new comment for a post
+POST {{host}}/comments
+Content-Type: application/json
+
+{
+  "content": "Great post! Extremely helpful.",
+  "author": "Jane Smith",
+  "createdAt": "2026-06-07T20:05:00",
+  "post": {
+    "id": 1
+  }
+}
+
+### 10. Delete a comment by ID
+DELETE {{host}}/comments/1
+
+###
+### STATS ENDPOINTS
+###
+
+### 11. Get post count per author
+GET {{host}}/stats/posts-per-author
+Accept: application/json
+
+### 12. Get post count per category
+GET {{host}}/stats/posts-per-category
+Accept: application/json

@@ -9,7 +9,7 @@ import technischools.projekt4.service.StatsServiceInterface;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/stats")
+@RequestMapping("/api/stats")
 public class StatsController extends BaseController {
     private final StatsServiceInterface statsService;
 

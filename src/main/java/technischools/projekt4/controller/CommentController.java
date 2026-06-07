@@ -10,7 +10,7 @@ import technischools.projekt4.service.CommentServiceInterface;
 import java.util.List;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/api/comments")
 public class CommentController extends BaseController {
     private final CommentServiceInterface commentService;
 
